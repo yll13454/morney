@@ -1,15 +1,19 @@
+
 <template>
-  <div>
-    Statistics
-  </div>
+    <div>
+        <Layout>
+            Statistics
+        </Layout>
+    </div>
 </template>
 
 <script>
-  export default {
-    name: 'Statistics'
-  }
+import Layout from '@/components/Layout.vue'
+export default {
+  name: 'Statistics',
+  components: { Layout }
+}
 </script>
 
 <style lang="scss" scoped>
-
 </style>

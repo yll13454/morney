@@ -1,12 +1,17 @@
+
 <template>
   <div>
-    Money
+    <Layout>
+        Money
+    </Layout>
   </div>
 </template>
 
 <script>
+import Layout from '@/components/Layout.vue';
   export default {
-    name: 'Money'
+    name: 'Money',
+    components:{ Layout }
   }
 </script>
 
