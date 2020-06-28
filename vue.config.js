@@ -4,27 +4,25 @@ module.exports = {
 const path = require('path')
 
 module.exports = {
-	lintOnSave: false,
-	chainWebpack:config=>{
-		const dir = path.resolve(__dirname,'src/assets/icons')
-
-
-        config.module
-            .rule('svg-sprite')
-            .test(/\.svg$/)//匹配规则，只要是.svg结尾的都用上面那个规则
-            .include.add(dir) //只处理处理svg目录
-            .end()
-            .use('svg-sprite-loader')
-            .loader('svg-sprite-loader')
-            .options({
-                extract:false,//不要解析出文件
-                symbolId: 'icon-[name]',
-            }).end()
-            .use('svgo-loader').loader('svgo-loader')
+  lintOnSave: false,
+  chainWebpack: config => {
+    const dir = path.resolve(__dirname, 'src/assets/icons')
+    config.module
+      .rule('svg-sprite')
+      .test(/\.svg$/)//匹配规则，只要是.svg结尾的都用上面那个规则
+      .include.add(dir) //只处理处理svg目录
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        extract: false,//不要解析出文件
+        symbolId: 'icon-[name]',
+      }).end()
+      .use('svgo-loader').loader('svgo-loader')
       .tap(options => ({...options, plugins: [{removeAttrs: {attrs: 'fill'}}]})).end();
-    
-        config.plugin('svg-sprite').use(require('svg-sprite-loader/plugin'),[{plainSprite:true}])
 
-        config.module.rule('svg').exclude.add(dir)//其他svg loader排除这个目录
-    }
+    config.plugin('svg-sprite').use(require('svg-sprite-loader/plugin'), [{plainSprite: true}])
+
+    config.module.rule('svg').exclude.add(dir)//其他svg loader排除这个目录
+  }
 }
